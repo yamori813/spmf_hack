@@ -1,0 +1,29 @@
+SECTIONS
+{
+  . = 0x80010000;
+  .text : {
+    Entry.o(.text)
+    *(.text)
+  }
+  .init : {
+    KEEP (*(.init))
+  }
+  .fini : {
+    KEEP (*(.fini))
+  }
+  PROVIDE (etext = .);
+  .rdata : { *(.rdata) }
+  .data : { *(.data) }
+  _gp = ALIGN(16);
+  .sdata : { *(.sdata) }
+  . = ALIGN(4);
+   PROVIDE (edata  =  .);
+   _edata  =  .;
+  _fbss = .;
+  .sbss : { *(.sbss) }
+  .bss : { *(.bss) }
+  . = ALIGN(32);
+  . = ALIGN(32);
+  PROVIDE (end = .);
+  _end = .;
+}
