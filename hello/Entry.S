@@ -1,4 +1,5 @@
 .global start
+.global print
 .extern main
 
 .set noreorder
@@ -14,6 +15,16 @@ start:
 	nop
 	b .
 	nop
+
+print:
+	addiu	$sp,$sp,-4
+	sw      $ra,0($sp)
+	lui	$3,0x8000
+	addiu	$3,$3, 9677
+	jr	$3
+	lw      $ra,0($sp)
+	j	$ra
+	addiu	$sp,$sp,4
 
 .section .bss
 stack:
