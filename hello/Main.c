@@ -1,6 +1,6 @@
 int main(void)
 {
 	print("Hello World!!");
-	print("MORIMORI");
+	printf("MORIMORI %d\n", 1234);
 	for(;;) ;
 }
