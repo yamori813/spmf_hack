@@ -17,14 +17,10 @@ start:
 	nop
 
 print:
-	addiu	$sp,$sp,-4
-	sw      $ra,0($sp)
-	lui	$3,0x8000
-	addiu	$3,$3, 9677
-	jr	$3
-	lw      $ra,0($sp)
-	j	$ra
-	addiu	$sp,$sp,4
+	lui	$t9,0x8000
+	addiu	$t9,$t9, 9677
+	jr	$t9
+	nop
 
 .section .bss
 stack:
