@@ -1,7 +1,7 @@
 int main(void)
 {
 long *ptr;
-	ptr = (long *)0xb00011c4;
+	ptr = (long *)0xb0004000;
 
 	print("Hello World!!");
 	printf("MORIMORI %d\n", 1234);

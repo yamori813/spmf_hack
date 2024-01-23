@@ -10,8 +10,10 @@
 .section .text
 
 start:
-	la $sp, stack
-	addiu $sp, STACKSIZE - 32
+	lui $sp, 0xd000
+	addiu $sp, $sp, 8188
+	lui $gp, 0x800c
+	addiu $gp, $gp, -9936
 	jal main
 	nop
 	b .
