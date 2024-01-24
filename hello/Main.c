@@ -1,7 +1,6 @@
 int main(void)
 {
 long *ptr;
-unsigned char *ptr8;
 
 	ptr = (long *)0xb0004000;
 
