@@ -45,8 +45,11 @@ print:
 	nop
 
 printf:
-;	lw	$t9,-32008($gp)
-;	lw	$a1,24($t9)
+/*
+check put function (0x80007D58)
+	lw	$t9,-32008($gp)
+	lw	$a1,24($t9)
+*/
 	lui	$t9,0x8000
 	addiu	$t9,$t9, 9725
 	jr	$t9

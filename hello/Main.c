@@ -9,7 +9,7 @@ unsigned char *ptr8;
 	printf("MORIMORI %d\n", 1234);
 	printf("MORIMORI %x\n", *ptr);
 	put('m');
-	aput('m');
+	aput('a');
 
 	for(;;) ;
 }
