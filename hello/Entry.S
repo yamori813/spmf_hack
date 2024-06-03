@@ -14,9 +14,18 @@
 .section .text
 
 start:
-	la $sp, stack
-	addiu $sp, STACKSIZE - 32
-	jal main
+	mfc0	$t1, $20
+	ori	$t1, $t1, 0xc
+	andi	$t1, $t1, 0xfffc
+	mtc0	$t1, $20
+	nop
+	andi	$t1, $t1, 0xffff
+	mtc0	$t1, $20
+	lui	$sp, 0xd000
+	addiu	$sp, $sp, 8188
+	jal	init
+	nop
+	jal	main
 	nop
 	b .
 	nop
@@ -65,6 +74,42 @@ check put function (0x80007D58)
 /* not work */
 rd_count:
 	mfc0	$v0, $9
+	jr	$ra
+	nop
+
+init:
+	lui	$t0,0xb000
+	li	$t1,1
+	sb	$t1,8354($t0)
+	sb	$t1,8353($t0)
+	li	$t1,16
+	sb	$t1,16440($t0)
+	sb	$t1,16432($t0)
+	li	$t1,15
+	sb	$t1,96($t0)
+	lui	$t1,0x8b
+	ori	$t1,$t1,0x245
+	sw	$t1,100($t0)
+	li	$t1,1
+	sb	$t1,137($t0)
+	sb	$zero,4($t0)
+	sw	$zero,4104($t0)
+	sw	$zero,4108($t0)
+	li	$t1,-1
+	sb	$t1,0($t0)
+	sh	$t1,4096($t0)
+	sw	$t1,4100($t0)
+	li	$t1,22529
+	sh	$t1,4104($t0)
+	sb	$zero,4208($t0)
+	lui	$t1,0xd000
+	sw	$t1,4192($t0)
+	lui	$t1,0xd000
+	ori	$t1,$t1,0x1fff
+	sw	$t1,4196($t0)
+	lh	$t1,88($t0)
+	sh	$zero,256($t0)
+	sh	$zero,258($t0)
 	jr	$ra
 	nop
 

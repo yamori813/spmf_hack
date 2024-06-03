@@ -1,6 +1,5 @@
 #!/bin/sh
 
-make
 #dd if=../../original.bin of=boot.bin bs=64k count=25 >/dev/null 2>&1
 ../tools/splzo Kernel.bin Kernel.lzo
 #cat boot.bin Kernel.lzo > tmp.bin
