@@ -2,17 +2,22 @@
 # binary path for reverse engineering
 #
 
-if ARGV.size === 4 then
+argc = ARGV.size
+if argc >= 4 && argc % 2 == 0 then
   old = ARGV[0]
   new = ARGV[1]
-  offset = ARGV[2].hex
-  inst = ARGV[3].hex
-  
+  p = 2
   bindata = File.binread(old)
-  bindata[offset] =  (inst >> 24).chr
-  bindata[offset + 1] =  ((inst >> 16) & 0xff).chr
-  bindata[offset + 2] =  ((inst >> 8) & 0xff).chr
-  bindata[offset + 3] =  (inst & 0xff).chr
+  while 2 + p <= argc
+    offset = ARGV[p].hex
+    inst = ARGV[p+1].hex
+
+    bindata[offset] =  (inst >> 24).chr
+    bindata[offset + 1] =  ((inst >> 16) & 0xff).chr
+    bindata[offset + 2] =  ((inst >> 8) & 0xff).chr
+    bindata[offset + 3] =  (inst & 0xff).chr
+    p = p + 2
+  end
   File.binwrite(new, bindata)
 else
   print "usage: binpatch.rb oldfile newfile offset data\n"
