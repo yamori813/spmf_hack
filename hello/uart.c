@@ -1,6 +1,6 @@
+/*
+ */
 
-
-//void cput(volatile unsigned char *addr, unsigned char ch)
 void cput(unsigned char *addr, unsigned char ch)
 {
 	int tmp;
