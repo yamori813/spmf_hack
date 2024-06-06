@@ -5,7 +5,7 @@ extern char _end[];
 void myprint(char *ch)
 {
 	while(*ch) {
-		myput((unsigned char *)0xb0000000, *ch);
+		cput((unsigned char *)0xb0000000, *ch);
 		++ch;
 	}
 }
