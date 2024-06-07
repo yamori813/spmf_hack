@@ -1,5 +1,4 @@
 
-
 extern char _end[];
 
 void myprint(char *ch)
@@ -13,13 +12,18 @@ void myprint(char *ch)
 int main(void)
 {
 int len;
+char ch;
 
 	len = strlen("morimori");
 
 	cput(0xb0000000, '0' + len);
 	myprint("MORIMORI");
 
-	for(;;) ;
+	for(;;) {
+		if (cget(&ch)) {
+			cput((unsigned char *)0xb0000000, ch);
+		}
+	}
 }
 
 void *
