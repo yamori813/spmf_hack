@@ -6,7 +6,8 @@ CROSSTOOL=mips
 CROSSBU=mips-unknown-freebsd13.0
 
 CROSS_CFLAGS = -I../build/work/newlib-3.0.0.20180831/newlib/libc/include/
-CROSS_CFLAGS += -O2 -march=mips32 -EL -G 0
+#CROSS_CFLAGS += -O2 -march=mips32 -EL -G 0
+CROSS_CFLAGS += -O2 -march=mips32 -EL
 CROSS_CFLAGS += -fno-pic -mno-abicalls
 CROSS_CFLAGS += -fno-strict-aliasing -fno-common -fomit-frame-pointer
 CROSS_CFLAGS += -pipe -mlong-calls
@@ -38,6 +39,16 @@ xp:
 	$(CROSSTOOL)-gcc $(CROSS_CFLAGS) -c uart.c
 	$(CROSSTOOL)-gcc -EL -c xprintf.c
 	$(CROSSBU)-ld -static -EL -T ldscript -o Kernel.elf Entry.o Main3.o uart.o xprintf.o 
+	$(CROSSBU)-objcopy -O binary Kernel.elf Kernel.bin
+	./mkimg.sh
+
+test:
+	$(CROSSBU)-as -EL -o Entry.o Entry.S
+	$(CROSSTOOL)-gcc $(CROSS_CFLAGS) -c Main4.c
+	$(CROSSTOOL)-gcc $(CROSS_CFLAGS) -c uart.c
+	$(CROSSTOOL)-gcc $(CROSS_CFLAGS) -c syscall.c
+	$(CROSSTOOL)-gcc -EL -c xprintf.c
+	$(CROSSBU)-ld -static -EL -T ldscript -o Kernel.elf Entry.o Main4.o uart.o xprintf.o syscall.o $(NEWLIB) -L$(GCCLIB) -lgcc
 	$(CROSSBU)-objcopy -O binary Kernel.elf Kernel.bin
 	./mkimg.sh
 
