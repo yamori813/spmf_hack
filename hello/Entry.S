@@ -5,6 +5,7 @@
 .global print
 .global printf
 .global rd_count
+.global rd_prid
 .extern main
 
 .set noreorder
@@ -91,10 +92,12 @@ check put function (0x80007D58)
 
 /* not work */
 rd_count:
-/*
 	mfc0	$v0, $9
-*/
-	mfc0	$v0, $16
+	jr	$ra
+	nop
+
+rd_prid:
+	mfc0	$v0, $15
 	jr	$ra
 	nop
 
