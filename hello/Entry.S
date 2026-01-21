@@ -46,7 +46,7 @@ start:
 	nop
 	b .
 	nop
-	.space 0x10c
+	.space 0x200
 
 put:
 	lui	$t9,0x8000
