@@ -19,8 +19,8 @@ NEWLIB=../build/work/newlib-3.0.0.20180831/mips/el/newlib/libc.a
 GCCLIB=/usr/local/lib/gcc/mips/4.9.2/el/
 
 all:
-	$(CROSSBU)-as -march=mips64 -EL -o Entry.o Entry.S
-	$(CROSSTOOL)-gcc -EL -march=mips64 -o Main.o -c Main.c -nostdlib -fno-builtin -nostartfiles -nodefaultlibs -O2
+	$(CROSSBU)-as -EL -o Entry.o Entry.S
+	$(CROSSTOOL)-gcc $(CROSS_CFLAGS) -c Main.c
 	$(CROSSBU)-ld -static -EL -T ldscript -o Kernel.elf Entry.o Main.o
 	$(CROSSBU)-objcopy -O binary Kernel.elf Kernel.bin
 	./mkimg.sh
