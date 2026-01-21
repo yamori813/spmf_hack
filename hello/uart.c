@@ -12,7 +12,7 @@ int cget(unsigned char *ch)
 	if (((tmp >> 1) & 1) == 0) {
 		return 0;
 	} else {
-		*ch = *(addr + 4364);
+		*ch = *(addr + 0x110c);
 		return 1;
 	}
 }
