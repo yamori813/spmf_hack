@@ -6,7 +6,7 @@ int cget(unsigned char *ch)
 {
 	int tmp;
 	unsigned char *addr;
-	addr = 0xb0000000;
+	addr = (unsigned char *)0xb0000000;
 	asm volatile ("lbu     %0,0x1101(%1)\n\tnop"
 	: "=r" (tmp) : "r" (addr));
 	if (((tmp >> 1) & 1) == 0) {

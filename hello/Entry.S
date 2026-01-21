@@ -21,14 +21,32 @@ start:
 	nop
 	andi	$t1, $t1, 0xffff
 	mtc0	$t1, $20
+	andi	$t1, $t1, 0xfff3
+	mtc0	$t1, $20
+/*
 	lui	$sp, 0xd000
 	addiu	$sp, $sp, 8188
+*/
+# bss clear
+	la	$8,_fbss
+	la	$9,_end
+1:	sw	$0,0($8)
+	add	$8,4
+	blt	$8,$9,1b
+	nop
+
+	li	$sp, 0x80800000
+	lui	$a0, 0xb000
+	li	$a1, '*'
+	jal	myput
+	nop
 	jal	init
 	nop
 	jal	main
 	nop
 	b .
 	nop
+	.space 0x140
 
 put:
 	lui	$t9,0x8000
@@ -73,7 +91,10 @@ check put function (0x80007D58)
 
 /* not work */
 rd_count:
+/*
 	mfc0	$v0, $9
+*/
+	mfc0	$v0, $16
 	jr	$ra
 	nop
 
@@ -114,6 +135,8 @@ init:
 	nop
 
 .section .bss
+/*
 stack:
 	.space STACKSIZE
+*/
 

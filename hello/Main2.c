@@ -1,3 +1,4 @@
+#include <string.h>
 
 extern char _end[];
 
@@ -9,15 +10,19 @@ void myprint(char *ch)
 	}
 }
 
+
 int main(void)
 {
 int len;
 char ch;
+char str[128];
 
+	cput(0xb0000000, '#');
 	len = strlen("morimori");
-
 	cput(0xb0000000, '0' + len);
-	myprint("MORIMORI");
+	strcpy(str, "MORIMORI");
+	myprint(str);
+	cput(0xb0000000, '#');
 
 	for(;;) {
 		if (cget(&ch)) {
