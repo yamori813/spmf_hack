@@ -6,8 +6,8 @@ CROSSTOOL=mips
 CROSSBU=mips-unknown-freebsd13.0
 
 CROSS_CFLAGS = -I../build/work/newlib-3.0.0.20180831/newlib/libc/include/
-#CROSS_CFLAGS += -O2 -march=mips32 -EL -G 0
-CROSS_CFLAGS += -O2 -march=mips32 -EL
+CROSS_CFLAGS += -O2 -march=mips32 -EL -G 0
+#CROSS_CFLAGS += -O2 -march=mips32 -EL
 CROSS_CFLAGS += -fno-pic -mno-abicalls
 CROSS_CFLAGS += -fno-strict-aliasing -fno-common -fomit-frame-pointer
 CROSS_CFLAGS += -pipe -mlong-calls
