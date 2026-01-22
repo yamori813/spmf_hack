@@ -1,16 +1,12 @@
 .global start
-.global put
-.global get
 .global myput
-.global print
-.global printf
 .global rd_count
 .global rd_prid
 .extern main
 
 .set noreorder
 
-.set STACKSIZE, 0x1000
+.set SPACESIZE, 0x200
 
 .section .text
 
@@ -47,19 +43,7 @@ start:
 	nop
 	b .
 	nop
-	.space 0x200
-
-put:
-	lui	$t9,0x8000
-	addiu	$t9,$t9, 0x3948
-	jr	$t9
-	nop
-
-get:
-	lui	$t9,0x8000
-	addiu	$t9,$t9, 0x7cc8
-	jr	$t9
-	nop
+	.space SPACESIZE
 
 myput:
 	andi	$a1,$a1,0xff
@@ -72,23 +56,6 @@ l1:
 	nop
 	jr	$ra
 	sb	$a1,4360($a0)	/* 0x1108 */
-
-print:
-	lui	$t9,0x8000
-	addiu	$t9,$t9, 9677
-	jr	$t9
-	nop
-
-printf:
-/*
-check put function (0x80007D58)
-	lw	$t9,-32008($gp)
-	lw	$a1,24($t9)
-*/
-	lui	$t9,0x8000
-	addiu	$t9,$t9, 9725
-	jr	$t9
-	nop
 
 /* not work */
 rd_count:
@@ -138,8 +105,4 @@ init:
 	nop
 
 .section .bss
-/*
-stack:
-	.space STACKSIZE
-*/
 
