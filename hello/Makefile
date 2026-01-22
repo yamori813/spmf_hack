@@ -47,9 +47,9 @@ nlxp:
 	$(CROSSBU)-as -EL -o Entry.o Entry.S
 	$(CROSSTOOL)-gcc $(CROSS_CFLAGS) -c Main4.c
 	$(CROSSTOOL)-gcc $(CROSS_CFLAGS) -c uart.c
-	$(CROSSTOOL)-gcc $(CROSS_CFLAGS) -c syscall.c
+	$(CROSSTOOL)-gcc $(CROSS_CFLAGS) -c syscalls.c
 	$(CROSSTOOL)-gcc -EL -c xprintf.c
-	$(CROSSBU)-ld -static -EL -T ldscript -o Kernel.elf Entry.o Main4.o uart.o xprintf.o syscall.o $(NEWLIB) -L$(GCCLIB) -lgcc
+	$(CROSSBU)-ld -static -EL -T ldscript -o Kernel.elf Entry.o Main4.o uart.o xprintf.o syscalls.o $(NEWLIB) -L$(GCCLIB) -lgcc
 	$(CROSSBU)-objcopy -O binary Kernel.elf Kernel.bin
 	./mkimg.sh
 
