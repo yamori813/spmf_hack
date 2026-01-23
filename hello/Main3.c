@@ -23,7 +23,8 @@ char str[128];
 
 	cput(0xb0000000, '%');
 
-	xprintf("MORIMORI %d",55);
+// xprintf not work by compiler option
+//	xprintf("MORIMORI %d",55);
 	xsprintf(str, "MORIMORI %d\n", 55);
 	myprint(str);
 	xsprintf(str, "MORIMORI %x\n", str);
