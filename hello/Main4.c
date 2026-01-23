@@ -37,6 +37,8 @@ char *ptr;
 	ptr = malloc(1024);
 	xsprintf(str, "MORIMORI %x\n", ptr);
 	myprint(str);
+	xsprintf(str, "config %x\n", rd_conf());
+	myprint(str);
 
 	for(;;) {
 		if (cget(&ch)) {

@@ -2,6 +2,7 @@
 .global myput
 .global rd_count
 .global rd_prid
+.global rd_conf
 .extern main
 
 .set noreorder
@@ -65,6 +66,11 @@ rd_count:
 
 rd_prid:
 	mfc0	$v0, $15
+	jr	$ra
+	nop
+
+rd_conf:
+	mfc0	$v0, $16
 	jr	$ra
 	nop
 
