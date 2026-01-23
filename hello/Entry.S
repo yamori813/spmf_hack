@@ -11,6 +11,9 @@
 
 .section .text
 
+/*
+This code is same as original threadx. But MIPS32 don't have cop0 $20. What ?
+*/
 start:
 	mfc0	$t1, $20
 	ori	$t1, $t1, 0xc
