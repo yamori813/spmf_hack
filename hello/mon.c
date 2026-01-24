@@ -51,7 +51,9 @@ int i, n;
 char ch;
 char cmd[128];
 char str[128];
+char *arg2;
 int *addr;
+int val;
 
 	myprint(" spmf2800 monitor start\r\n");
 	myprint("> ");
@@ -77,6 +79,22 @@ int *addr;
 				} else if (cmd[0] == 'G') {
 					addr = (int *)htoi(cmd + 2);
 					jmp(addr);
+				} else if (cmd[0] == 'W') {
+					i = 2;
+					arg2 = 0;
+					while(cmd[i] != 0) {
+						if (cmd[i] == ' ') {
+							arg2 = cmd + i + 1;
+							cmd[i] = 0;
+							break;
+						}
+						++i;
+					}
+					if (arg2) {
+						addr = (int *)htoi(cmd + 2);
+						val = htoi(arg2);
+						*addr = val;
+					}
 				} else
 					myprint("error\r\n");
 				n = 0;	
