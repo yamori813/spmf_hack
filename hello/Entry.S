@@ -3,6 +3,7 @@
 .global rd_count
 .global rd_prid
 .global rd_conf
+.global jmp
 .extern main
 
 .set noreorder
@@ -36,7 +37,8 @@ start:
 	blt	$8,$9,1b
 	nop
 
-	li	$sp, 0x80800000
+#	li	$sp, 0x80800000
+	li	$sp, 0x80020000
 	lui	$a0, 0xb000
 	li	$a1, '*'
 	jal	myput
@@ -111,6 +113,10 @@ init:
 	sh	$zero,256($t0)
 	sh	$zero,258($t0)
 	jr	$ra
+	nop
+
+jmp:
+	jr	$a0
 	nop
 
 .section .bss
