@@ -45,6 +45,14 @@ unsigned int res, n;
 	return res;
 }
 
+void help()
+{
+
+	myprint("D <address> dump memory\r\n");
+	myprint("W <address> <value> write value to memory\n");
+	myprint("G <address> call function\r\n");
+}
+
 int main(void)
 {
 int i, n;
@@ -95,6 +103,8 @@ int val;
 						val = htoi(arg2);
 						*addr = val;
 					}
+				} else if (cmd[0] == 'H') {
+					help();
 				} else
 					myprint("error\r\n");
 				n = 0;	
