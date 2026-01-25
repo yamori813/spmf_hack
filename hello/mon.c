@@ -48,7 +48,7 @@ void help()
 {
 
 	myprint("D <address> dump memory\r\n");
-	myprint("W <address> <value> write value to memory\n");
+	myprint("W <address> <value> write value to memory\r\n");
 	myprint("G <address> call function\r\n");
 }
 
