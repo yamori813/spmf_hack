@@ -1,7 +1,6 @@
-#include <string.h>
-#include <stdlib.h>
-
-#include "xprintf.h"
+/*
+ * SPMF2800 monitor program
+ */
 
 void myprint(char *ch)
 {

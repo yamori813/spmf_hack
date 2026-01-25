@@ -12,9 +12,6 @@ CROSS_CFLAGS += -fno-pic -mno-abicalls
 CROSS_CFLAGS += -fno-strict-aliasing -fno-common -fomit-frame-pointer
 CROSS_CFLAGS += -pipe -mlong-calls
 
-#CROSS_CFLAGS = -I../build/work/newlib-3.0.0.20180831/newlib/libc/include/
-#CROSS_CFLAGS += -nostdlib -fno-builtin -nostartfiles -nodefaultlibs -march=mips32 -fno-pic -mno-abicalls -O2 -G 0 -EL
-
 NEWLIB=../build/work/newlib-3.0.0.20180831/mips/el/newlib/libc.a 
 GCCLIB=/usr/local/lib/gcc/mips/4.9.2/el/
 
