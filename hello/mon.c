@@ -79,7 +79,7 @@ int val;
 					addr = (int *)htoi(cmd + 2);
 					hprint((int)addr);
 					myprint(" ");
-					for (i = 0; i < 16; i += 4) {
+					for (i = 0; i < 4; ++i) {
 						myprint(" ");
 						hprint(*(addr + i));
 					}
