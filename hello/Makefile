@@ -12,6 +12,8 @@ CROSS_CFLAGS += -fno-pic -mno-abicalls
 CROSS_CFLAGS += -fno-strict-aliasing -fno-common -fomit-frame-pointer
 CROSS_CFLAGS += -pipe -mlong-calls
 
+CROSS_LDFLAGS = -static -EL -T ldscript
+
 NEWLIB=../build/work/newlib-3.0.0.20180831/mips/el/newlib/libc.a 
 GCCLIB=/usr/local/lib/gcc/mips/4.9.2/el/
 
@@ -19,7 +21,7 @@ all:
 	$(CROSSBU)-as -EL -o Entry.o Entry.S
 	$(CROSSBU)-as -EL -march=mips32 -o bootfunc.o bootfunc.S
 	$(CROSSTOOL)-gcc $(CROSS_CFLAGS) -c Main.c
-	$(CROSSBU)-ld -static -EL -T ldscript -o Kernel.elf Entry.o bootfunc.o Main.o
+	$(CROSSBU)-ld $(CROSS_LDFLAGS) -o Kernel.elf Entry.o bootfunc.o Main.o
 	$(CROSSBU)-objcopy -O binary Kernel.elf Kernel.bin
 	./mkimg.sh
 
@@ -27,7 +29,7 @@ nl:
 	$(CROSSBU)-as -EL -o Entry.o Entry.S
 	$(CROSSTOOL)-gcc $(CROSS_CFLAGS) -c Main2.c
 	$(CROSSTOOL)-gcc $(CROSS_CFLAGS) -c uart.c
-	$(CROSSBU)-ld -static -EL -T ldscript -o Kernel.elf Entry.o Main2.o uart.o $(NEWLIB) -L$(GCCLIB) -lgcc
+	$(CROSSBU)-ld $(CROSS_LDFLAGS) -o Kernel.elf Entry.o Main2.o uart.o $(NEWLIB) -L$(GCCLIB) -lgcc
 	$(CROSSBU)-objcopy -O binary Kernel.elf Kernel.bin
 	./mkimg.sh
 
@@ -36,7 +38,7 @@ xp:
 	$(CROSSTOOL)-gcc $(CROSS_CFLAGS) -c Main3.c
 	$(CROSSTOOL)-gcc $(CROSS_CFLAGS) -c uart.c
 	$(CROSSTOOL)-gcc $(CROSS_CFLAGS) -c xprintf.c
-	$(CROSSBU)-ld -static -EL -T ldscript -o Kernel.elf Entry.o Main3.o uart.o xprintf.o 
+	$(CROSSBU)-ld $(CROSS_LDFLAGS) -o Kernel.elf Entry.o Main3.o uart.o xprintf.o
 	$(CROSSBU)-objcopy -O binary Kernel.elf Kernel.bin
 	./mkimg.sh
 
@@ -46,7 +48,7 @@ nlxp:
 	$(CROSSTOOL)-gcc $(CROSS_CFLAGS) -c uart.c
 	$(CROSSTOOL)-gcc $(CROSS_CFLAGS) -c syscalls.c
 	$(CROSSTOOL)-gcc $(CROSS_CFLAGS) -c xprintf.c
-	$(CROSSBU)-ld -static -EL -T ldscript -o Kernel.elf Entry.o Main4.o uart.o xprintf.o syscalls.o $(NEWLIB) -L$(GCCLIB) -lgcc
+	$(CROSSBU)-ld $(CROSS_LDFLAGS) -o Kernel.elf Entry.o Main4.o uart.o xprintf.o syscalls.o $(NEWLIB) -L$(GCCLIB) -lgcc
 	$(CROSSBU)-objcopy -O binary Kernel.elf Kernel.bin
 	./mkimg.sh
 
@@ -54,7 +56,7 @@ mon:
 	$(CROSSBU)-as -EL -o Entry.o Entry.S
 	$(CROSSTOOL)-gcc $(CROSS_CFLAGS) -c mon.c
 	$(CROSSTOOL)-gcc $(CROSS_CFLAGS) -c uart.c
-	$(CROSSBU)-ld -static -EL -T ldscript -o Kernel.elf Entry.o mon.o uart.o 
+	$(CROSSBU)-ld $(CROSS_LDFLAGS) -o Kernel.elf Entry.o mon.o uart.o
 	$(CROSSBU)-objcopy -O binary Kernel.elf Kernel.bin
 	./mkimg.sh
 
